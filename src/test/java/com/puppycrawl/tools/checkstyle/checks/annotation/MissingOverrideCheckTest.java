@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import static com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck.MSG_KEY_ANNOTATION_MISSING_OVERRIDE;
 import static com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck.MSG_KEY_TAG_NOT_VALID_ON;
+import static org.junit.Assert.assertNotNull;
 
 public class MissingOverrideCheckTest extends BaseCheckTestSupport
 {
@@ -258,5 +259,11 @@ public class MissingOverrideCheckTest extends BaseCheckTestSupport
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "GoodAnnonOverride.java"), expected);
+    }
+
+    @Test
+    public void testGetAcceptableTokens()
+    {
+        assertNotNull(new MissingOverrideCheck().getAcceptableTokens());
     }
 }

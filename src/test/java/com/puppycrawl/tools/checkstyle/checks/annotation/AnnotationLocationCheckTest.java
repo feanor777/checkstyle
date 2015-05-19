@@ -26,6 +26,7 @@ import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 
 import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION_ALONE;
 import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationLocationCheck.MSG_KEY_ANNOTATION_LOCATION;
+import static org.junit.Assert.assertNotNull;
 
 public class AnnotationLocationCheckTest extends BaseCheckTestSupport
 {
@@ -65,5 +66,28 @@ public class AnnotationLocationCheckTest extends BaseCheckTestSupport
             "98: " + getCheckMessage(MSG_KEY_ANNOTATION_LOCATION, "MyAnnotation2", 0, 3),
         };
         verify(checkConfig, getPath("annotation/InputIncorrectAnnotationLocation.java"), expected);
+    }
+
+    @Test
+    public void testWithoutAnnotation() throws Exception
+    {
+        DefaultConfiguration checkConfig = createCheckConfig(AnnotationLocationCheck.class);
+        final String[] expected = {};
+        verify(checkConfig, getPath("annotation/InputWithoutAnnotationLocation.java"), expected);
+    }
+
+    @Test
+    public void testSetAllowSamelineSingleParameterlessAnnotation()
+    {
+        AnnotationLocationCheck alc = new AnnotationLocationCheck();
+        alc.setAllowSamelineSingleParameterlessAnnotation(true);
+        alc.setAllowSamelineMultipleAnnotations(true);
+        alc.setAllowSamelineParameterizedAnnotation(true);
+    }
+
+    @Test
+    public void testGetAcceptableTokens()
+    {
+        assertNotNull(new AnnotationLocationCheck().getAcceptableTokens());
     }
 }

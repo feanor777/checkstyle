@@ -19,8 +19,12 @@
 
 package com.puppycrawl.tools.checkstyle.checks.annotation;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
+
 import org.junit.Test;
+
 import com.puppycrawl.tools.checkstyle.BaseCheckTestSupport;
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 
@@ -40,5 +44,11 @@ public class PackageAnnotationTest extends BaseCheckTestSupport
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "package-info.java"), expected);
+    }
+
+    @Test
+    public void testGetAcceptableTokens()
+    {
+        assertNotNull(new PackageAnnotationCheck().getAcceptableTokens());
     }
 }

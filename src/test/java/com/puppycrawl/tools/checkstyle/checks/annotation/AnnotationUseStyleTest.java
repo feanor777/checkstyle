@@ -20,7 +20,9 @@
 package com.puppycrawl.tools.checkstyle.checks.annotation;
 
 import java.io.File;
+
 import org.junit.Test;
+
 import com.puppycrawl.tools.checkstyle.BaseCheckTestSupport;
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 
@@ -29,6 +31,7 @@ import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseSty
 import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_PARENS_PRESENT;
 import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_TRAILING_COMMA_MISSING;
 import static com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck.MSG_KEY_ANNOTATION_TRAILING_COMMA_PRESENT;
+import static org.junit.Assert.assertNotNull;
 
 public class AnnotationUseStyleTest extends BaseCheckTestSupport
 {
@@ -220,5 +223,11 @@ public class AnnotationUseStyleTest extends BaseCheckTestSupport
         };
 
         verify(checkConfig, getPath("annotation" + File.separator + "AnnotationsUseStyleParams.java"), expected);
+    }
+
+    @Test
+    public void testGetAcceptableTokens()
+    {
+        assertNotNull(new AnnotationUseStyleCheck().getAcceptableTokens());
     }
 }
